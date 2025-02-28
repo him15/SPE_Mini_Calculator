@@ -1,0 +1,33 @@
+---
+- name: Deploy Docker Container
+  hosts: localhost
+  remote_user: him1502
+  become: false
+  vars:
+    ansible_python_interpreter: /Users/himanshushivhare/.ansible-env/bin/python3
+
+  tasks:
+    - name: Ensure required Ansible collections are installed
+      ansible.builtin.command:
+        cmd: ansible-galaxy collection install community.docker
+      changed_when: false
+
+    - name: Pull Docker Image from Docker Hub
+      community.docker.docker_image:
+        name: "him1502/spe_mini_calc:latest"
+        source: pull
+
+    - name: Stop and remove existing container if running
+      community.docker.docker_container:
+        name: spe_mini_calc
+        state: absent
+
+    - name: Run the new container
+      community.docker.docker_container:
+        name: spe_mini_calc
+        image: him1502/spe_mini_calc:latest
+        state: started
+        detach: true
+        interactive: true
+        tty: true
+        command: ["java", "-cp", "/app/SPE_Calculator-1.0-SNAPSHOT.jar", "com.himanshu.Calculator"]

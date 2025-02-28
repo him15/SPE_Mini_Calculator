@@ -5,7 +5,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-RUN mvn clean package
+RUN mvn clean package && ls -l /app/target
 
 
 FROM openjdk:17
@@ -14,4 +14,4 @@ WORKDIR /app
 
 COPY --from=build /app/target/SPE_Calculator-1.0-SNAPSHOT.jar .
 
-CMD ["java", "-jar", "/app/spe_mini_project-1.0-SNAPSHOT.jar", "com.himanshu.Calculator"]
+CMD ["java", "-cp", "/app/SPE_Calculator-1.0-SNAPSHOT.jar", "com.himanshu.Calculator"]
