@@ -58,12 +58,12 @@ pipeline {
         success {
             mail to: 'Him150299@gmail.com',
                 subject: "Application Deployment SUCCESS: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: "The build was successful!"
+                body: "Great! The build was successful Deployed!"
         }
         failure {
             mail to: 'Him150299@gmail.com',
                 subject: "Application Deployment FAILURE: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: "The build failed."
+                body: "OOPS!!! The build failed! check the error once"
         }
         always {
             cleanWs()
