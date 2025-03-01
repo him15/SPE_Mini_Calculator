@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Calculator {
     public static void main(String[] args) {
         while(true) {
-            System.out.println("<------- Menu for Calculator ------->");
+            System.out.println("<+++++++++++++++ Menu for Calculator ++++++++++++++++++++>");
             System.out.println("1. Square root");
             System.out.println("2. Factorial");
             System.out.println("3. Natural logarithm (base e) - ln(x)");
